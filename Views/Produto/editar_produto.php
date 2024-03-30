@@ -33,13 +33,13 @@
 		$resposta = $controllerProduto->editarProduto($produto['ID'], $objProduto);
 
 		if ($resposta == "Sucesso") {
-			header("Location: http://localhost/ecommerce/Views/Produto/editar_produto.php?id={$produto['ID']}&mensagem=alteracoes_salvas");
+			header("Location: http://localhost/ecommerce/Views/Produto/editar_produto.php?id={$produto['ID']}&mensagem=Alteração+salva+com+sucesso");
 		} else {
 			echo $resposta;
 		}
 	}
 
 	if (isset($_GET['mensagem'])) {
-		echo "Alteração salva com sucesso";
+		echo $_GET['mensagem'];
 	}
 ?>

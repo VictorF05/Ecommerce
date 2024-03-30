@@ -70,6 +70,7 @@
 							echo "</td>";
 							echo "<td>";
 							echo "<form action='' method='post'>";
+								echo "<input type='hidden' name='produto_id' value='".$produto['ID']."'>";
 								echo "<button type='submit' name='excluir'>";
 									echo "❌";
 								echo "</button>";
@@ -108,5 +109,19 @@
 
 	if (isset($_POST['editar'])) {
 		header("Location: http://localhost/ecommerce/Views/Produto/editar_produto.php?id={$_POST['produto_id']}");
+	}
+
+	if (isset($_POST['excluir'])) {	
+		$resposta = $controllerProduto->excluirProduto($objProduto, $_POST['produto_id']);
+	
+		if ($resposta == "Sucesso") {	
+			header("Location: http://localhost/ecommerce/Views/Produto/listagem_produtos.php?mensagem=Produto+excluído+com+sucesso");
+		} else {
+			echo $resposta;
+		}
+	}
+
+	if (isset($_GET['mensagem'])) {
+		echo $_GET['mensagem'];
 	}
 ?>

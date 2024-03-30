@@ -35,6 +35,16 @@
 			return $objproduto->ListarPorId($produtoId);
 		}
 
+		public function excluirProduto($objProduto, $produtoId) {
+			$resposta = $objProduto->AtualizarEstoque($produtoId, 0);
+
+			if($resposta == "Erro" || !$resposta) {
+				return "Erro ao excluir o produto";
+			}
+
+			return $resposta;
+		}
+
 		public function atualizaEstoque ($produtoId, $quantidade, $operacao) {
 			$produto = $this->getProduto($produtoId);
 
