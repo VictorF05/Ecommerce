@@ -102,7 +102,7 @@
 			$objConexao = new Conexao();
 			$conexao = $objConexao->getConexao();
 
-			$sql = "SELECT * FROM Usuarios WHERE id = $usuarioId AND isActive = 1";
+			$sql = "SELECT * FROM Usuarios WHERE ID = '$usuarioId' AND isActive = 1";
 
 			$resposta = $conexao->query($sql);
 			$usuario = $resposta->fetch_assoc();
@@ -110,6 +110,24 @@
 			if (!$usuario) {
 				mysqli_close($conexao);
 				return "Erro";
+			} else {
+				mysqli_close($conexao);
+				return $usuario;
+			}
+		}
+
+		public function ListarPorEmail($usuarioEmail) {
+			$objConexao = new Conexao();
+			$conexao = $objConexao->getConexao();
+		
+			$sql = "SELECT * FROM Usuarios WHERE Email = '$usuarioEmail' AND isActive = 1";
+
+			$resposta = $conexao->query($sql);
+			$usuario = $resposta->fetch_assoc();
+
+			if (!$usuario) {
+				mysqli_close($conexao);
+				return null;
 			} else {
 				mysqli_close($conexao);
 				return $usuario;
@@ -139,7 +157,7 @@
 			$objConexao = new Conexao();
 			$conexao = $objConexao->getConexao();
 
-			$sql = "UPDATE Usuarios SET isActive = 0 WHERE id = $usuarioId AND isActive = 1";
+			$sql = "UPDATE Usuarios SET isActive = 0 WHERE ID = '$usuarioId' AND isActive = 1";
 
 			if (mysqli_query($conexao, $sql)) {
 				mysqli_close($conexao);

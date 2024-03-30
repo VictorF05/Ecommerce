@@ -10,6 +10,12 @@
 		}
 
 		public function cadastraUsuario ($objUsuario) {
+			$usuario = $this->verificaEmailExistente($objUsuario);
+
+			if ($usuario) {
+				return "Erro: esse email já está em uso.";
+			}
+
 			if (
 				$this->validaNome($objUsuario->getNome()) && 
 				$this->validaEmail($objUsuario->getEmail()) && 
@@ -35,6 +41,10 @@
 			$objUsuario = new Usuario();
 
 			return $objUsuario->Excluir($usuarioId);
+		}
+
+		public function verificaEmailExistente($objUsuario) {
+			return $objUsuario->ListarPorEmail($objUsuario->getEmail());
 		}
 
 		public function validaUsuario ($objUsuario) {
