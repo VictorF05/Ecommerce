@@ -15,7 +15,9 @@
 					<th>Valor</th>
 					<th>Categoria</th>
 					<th>Quantidade</th>
-					<th>Adicionar ao carrinho</th>
+					<th>Adicionar<br>ao carrinho</th>
+					<th>Editar</th>
+					<th>Excluir</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -58,6 +60,21 @@
 										echo "</button>";
 									echo "</form>";
 								echo "</td>";
+								echo "<td>";
+								echo "<form action='' method='post'>";
+									echo "<input type='hidden' name='produto_id' value='".$produto['ID']."'>";
+									echo "<button type='submit' name='editar'>";
+										echo "✏️";
+									echo "</button>";
+								echo "</form>";
+							echo "</td>";
+							echo "<td>";
+							echo "<form action='' method='post'>";
+								echo "<button type='submit' name='excluir'>";
+									echo "❌";
+								echo "</button>";
+							echo "</form>";
+						echo "</td>";
 							echo "</tr>";
 						}
 					} else {
@@ -87,5 +104,9 @@
 		} else {
 			echo $resposta;
 		}
+	}
+
+	if (isset($_POST['editar'])) {
+		header("Location: http://localhost/ecommerce/Views/Produto/editar_produto.php?id={$_POST['produto_id']}");
 	}
 ?>

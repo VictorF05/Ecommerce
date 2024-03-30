@@ -14,6 +14,17 @@
 			}
 		}
 
+		public function editarProduto ($produtoId, $objProduto) {
+			if (
+				$this->validaDescricao($objProduto->getDescricao()) && 
+				$this->validaValor($objProduto->getValor()) && 
+				$this->validaCategoria($objProduto->getCategoria()) && 
+				$this->validaQuantidade($objProduto->getQuantidade())
+				){
+				return $objProduto->Editar($produtoId);
+			}
+		}
+
 		public function listarProdutos ($objProduto) {
 			return $objProduto->Listar();
 		}

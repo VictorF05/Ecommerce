@@ -119,5 +119,24 @@
 				return "Erro";
 			}
 		}
+
+		public function Editar($produtoId) {
+			$objConexao = new Conexao();
+			$conexao = $objConexao->getConexao();
+
+			$sql = "UPDATE Produtos SET Descricao = '$this->descricao',
+				Valor = '$this->valor',
+				Categoria = '$this->categoria',
+				Quantidade = '$this->quantidade' 
+				WHERE ID = $produtoId";
+
+			if (mysqli_query($conexao, $sql)) {
+				mysqli_close($conexao);
+				return "Sucesso";
+			} else {
+				mysqli_close($conexao);
+				return "Erro";
+			}
+		}
 	}
 ?>
