@@ -8,6 +8,7 @@
 		private $email;
 		private $senha;
 		private $endereco;
+		private $isactive;
 
 		// getters
 
@@ -31,6 +32,9 @@
 			return $this->endereco;
 		}
 
+		public function getIsActive() {
+			return $this->isactive;
+		}
 
 		// setters
 
@@ -54,19 +58,23 @@
 			return $this->endereco = $endereco;
 		}
 
+		public function setIsActive($isactive) {
+			return $this->isactive = $isactive;
+		}
+
 		// métodos
 
 		public function Login() {
 			$objConexao = new Conexao();
 			$conexao = $objConexao->getConexao();
 
-			$sql = "SELECT * FROM Usuarios WHERE Email = '" . $this->getEmail() . "'";
+			$sql = "SELECT * FROM Usuarios WHERE Email = '" . $this->getEmail() . "' AND isActive = 1";
 
 			$resposta = $conexao->query($sql);
 			$usuario = $resposta->fetch_assoc();
 
 			if (!$usuario) {
-				echo "Email não cadastrado";
+				echo "Email não cadastrado ou usuário inativo";
 			} elseif ($usuario['Senha'] != $this->getSenha()) {
 				echo "Senha incorreta";
 			} else {
@@ -94,7 +102,7 @@
 			$objConexao = new Conexao();
 			$conexao = $objConexao->getConexao();
 
-			$sql = "SELECT * FROM Usuarios WHERE id = $usuarioId";
+			$sql = "SELECT * FROM Usuarios WHERE id = $usuarioId AND isActive = 1";
 
 			$resposta = $conexao->query($sql);
 			$usuario = $resposta->fetch_assoc();
@@ -116,7 +124,22 @@
 				Email = '$this->email',
 				Senha = '$this->senha',
 				Endereco = '$this->endereco' 
-				WHERE id = $usuarioId";
+				WHERE id = $usuarioId AND isActive = 1";
+
+			if (mysqli_query($conexao, $sql)) {
+				mysqli_close($conexao);
+				return "Sucesso";
+			} else {
+				mysqli_close($conexao);
+				return "Erro";
+			}
+		}
+
+		public function Excluir($usuarioId) {
+			$objConexao = new Conexao();
+			$conexao = $objConexao->getConexao();
+
+			$sql = "UPDATE Usuarios SET isActive = 0 WHERE id = $usuarioId AND isActive = 1";
 
 			if (mysqli_query($conexao, $sql)) {
 				mysqli_close($conexao);

@@ -7,6 +7,15 @@
 		<a href="../Carrinho/listagem_produtos_carrinho.php">Ver carrinho</a>
 		<a href="../Pedido/listagem_pedidos.php">Ver pedidos</a>
 
+		<form action="" method="post">
+			<input type="hidden" name="usuario_id" value="<?php echo $_SESSION['usuario_id']?>">
+			<button type="submit" name="excluirUsuario">Excluir usuário</button>
+		</form>
+
+		<form action="" method="post">
+			<button type="submit" name="sair">Sair</button>
+		</form>
+
 		<table>
 			<thead>
 				<tr>
@@ -89,6 +98,7 @@
 
 <?php
 	include_once($path.'/Controllers/carrinho_controller.php');
+	include_once($path.'/Controllers/usuario_controller.php');
 
 	if (isset($_POST['adicionar'])) {
 		$objCarrinho = new Carrinho();
@@ -123,5 +133,24 @@
 
 	if (isset($_GET['mensagem'])) {
 		echo $_GET['mensagem'];
+	}
+
+	if (isset($_POST['excluirUsuario'])) {	
+		$controllerUsuario = new UsuarioController();
+
+		$resposta = $controllerUsuario->excluirUsuario($_SESSION['usuario_id']);
+	
+		if ($resposta == "Sucesso") {	
+			header("Location: http://localhost/ecommerce/index.php");
+		} else {
+			echo $resposta;
+		}
+	}
+
+	if (isset($_POST['sair'])) {
+		session_start();
+		session_unset();
+		session_destroy();
+		header("Location: http://localhost/ecommerce/index.php");
 	}
 ?>

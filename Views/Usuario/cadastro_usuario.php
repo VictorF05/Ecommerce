@@ -29,7 +29,7 @@
 		$resposta = $controllerUsuario->cadastraUsuario($objUsuario);
 
 		if ($resposta == "Sucesso") {
-			header("Location: http://localhost/ecommerce/Views/Produto/listagem_produtos.php");
+			header("Location: http://localhost/ecommerce/index.php");
 		} else {
 			echo $resposta;
 		}

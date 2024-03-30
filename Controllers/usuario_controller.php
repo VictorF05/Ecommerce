@@ -31,6 +31,12 @@
 			}
 		}
 
+		public function excluirUsuario ($usuarioId) {
+			$objUsuario = new Usuario();
+
+			return $objUsuario->Excluir($usuarioId);
+		}
+
 		public function validaUsuario ($objUsuario) {
 			if (
 				$this->validaEmail($objUsuario->getEmail()) && 

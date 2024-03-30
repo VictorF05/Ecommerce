@@ -8,6 +8,7 @@
 		Categoria: <input type="text" name="categoria" value=""> <br>
 		Quantidade: <input type="number" name="quantidade" value=""> <br>
 		<button type="submit" name="cadastrar">Cadastrar</button>
+		<a href="./listagem_produtos.php">Voltar</a>
 	</form>
 </body>
 </html>

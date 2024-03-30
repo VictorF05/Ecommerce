@@ -31,5 +31,4 @@
 			header("Location: http://localhost/ecommerce/Views/Produto/listagem_produtos.php");
 		}
 	}
-
 ?>
