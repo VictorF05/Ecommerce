@@ -3,8 +3,9 @@
 	include_once($path.'/Controllers/usuario_controller.php');
 
 	session_start();
-
 	$controllerUsuario = new UsuarioController();
+
+	$controllerUsuario->verificaLogin();
 
 	$usuario = $controllerUsuario->getUsuario($_SESSION["usuario_id"]);
 ?>

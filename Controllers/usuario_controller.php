@@ -9,6 +9,14 @@
 			return $objUsuario->ListarPorId($usuarioId);
 		}
 
+		public function verificaLogin() {
+			session_start();
+
+			if (!isset($_SESSION["usuario_id"])) {
+				header("Location: http://localhost/ecommerce/index.php");
+			}
+		}
+
 		public function cadastraUsuario ($objUsuario) {
 			$usuario = $this->verificaEmailExistente($objUsuario);
 

@@ -15,6 +15,11 @@
 <?php
 	$path = $_SERVER['DOCUMENT_ROOT'].'/ecommerce';
 	include_once($path.'/Controllers/produto_controller.php');
+	include_once($path.'/Controllers/usuario_controller.php');
+
+	$controllerUsuario = new UsuarioController();
+	
+	$controllerUsuario->verificaLogin();
 
 	if (isset($_POST['cadastrar'])) {
 		$objProduto = new Produto();

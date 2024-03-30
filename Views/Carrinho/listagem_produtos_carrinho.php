@@ -2,6 +2,11 @@
 	$path = $_SERVER['DOCUMENT_ROOT'].'/ecommerce';
 	include_once($path.'/Controllers/carrinho_controller.php');
 	include_once($path.'/Controllers/pedido_controller.php');
+	include_once($path.'/Controllers/usuario_controller.php');
+
+	$controllerUsuario = new UsuarioController();
+
+	$controllerUsuario->verificaLogin();
 
 	session_start();
 		

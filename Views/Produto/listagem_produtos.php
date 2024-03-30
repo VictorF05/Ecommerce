@@ -100,6 +100,10 @@
 	include_once($path.'/Controllers/carrinho_controller.php');
 	include_once($path.'/Controllers/usuario_controller.php');
 
+	$controllerUsuario = new UsuarioController();
+	
+	$controllerUsuario->verificaLogin();
+
 	if (isset($_POST['adicionar'])) {
 		$objCarrinho = new Carrinho();
 		$objCarrinho->setQuantidade(1);
@@ -136,8 +140,6 @@
 	}
 
 	if (isset($_POST['excluirUsuario'])) {	
-		$controllerUsuario = new UsuarioController();
-
 		$resposta = $controllerUsuario->excluirUsuario($_SESSION['usuario_id']);
 	
 		if ($resposta == "Sucesso") {	
