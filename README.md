@@ -11,6 +11,8 @@ Usuários
       - Não executa "DELETE" no banco de dados, apenas "set" como inativo no banco
   - Login
       - Valida email e senha apenas de usuários que constam como ativos no banco de dados
+  - Logout
+      - Encerra a sessão e redireciona para a página de login
 
 Produtos
   - Cadastro
